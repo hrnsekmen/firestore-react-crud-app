@@ -5,8 +5,9 @@ import Header from "./Header";
 import Table from "./Table";
 import Add from "./Add";
 import Edit from "./Edit";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../config/firestore";
+
 const Dashboard = ({ setIsAuthenticated }) => {
   const [employees, setEmployees] = useState();
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -43,7 +44,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
     }).then((result) => {
       if (result.value) {
         const [employee] = employees.filter((employee) => employee.id === id);
-        // TODO delete document
+        deleteDoc(doc(db, "employees", id));
         Swal.fire({
           icon: "success",
           title: "Deleted!",
