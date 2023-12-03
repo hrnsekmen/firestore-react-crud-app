@@ -43,9 +43,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
     }).then((result) => {
       if (result.value) {
         const [employee] = employees.filter((employee) => employee.id === id);
-
         // TODO delete document
-
         Swal.fire({
           icon: "success",
           title: "Deleted!",
@@ -79,6 +77,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
       )}
       {isAdding && (
         <Add
+          getEmployees={getEmployees}
           employees={employees}
           setEmployees={setEmployees}
           setIsAdding={setIsAdding}
